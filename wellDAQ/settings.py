@@ -62,7 +62,7 @@ ROOT_URLCONF = 'wellDAQ.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "./templates")],  # 添加一个公共模板目录
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,9 +84,9 @@ WSGI_APPLICATION = 'wellDAQ.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'welldatabase',# 数据库名，数据库需要在mysql中建立
-        'USER': 'root',# 必须设置为原来数据库的登录帐号
-        'PASSWORD': 'Lingyue86',# 登录密码
+        'NAME': 'welldatabase',  # 数据库名，数据库需要在mysql中建立
+        'USER': 'root',  # 必须设置为原来数据库的登录帐号
+        'PASSWORD': 'Lingyue86',  # 登录密码
         'HOST': 'localhost',
         'POST': '3306',
     }
