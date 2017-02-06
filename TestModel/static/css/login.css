@@ -1,0 +1,56 @@
+/*样式选择器*/
+/*form 里的 div*/
+form div {
+    margin: 10px 5px
+}
+input[type='text'] {
+    border: 1px solid rgba(51,51,51,0.5);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    text-align: center;width: 100%;
+    font-size: 16px;
+    line-height: 20px;
+}
+/*定义一个类*/
+*.lg-container {
+    width: 440px;
+    margin: 200px auto;
+    padding: 20px 40px;
+    border: 1px solid #f4f4f4;
+    background: rgba(255,255,255,0.5);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    --webkit-box-shadow: 0 0 2px #aaa;
+    --moz-box-shadow: 0 0 2px #aaa;
+}
+*.lg-button {
+    border: 1px solid #000;
+    width: 100px;
+    padding: 5px 10px;
+    border: 1px solid rgba(51,51,51,0.5);
+    -webkit-border-radius:  10px;-moz-border-radius: 10px;
+    -webkit-box-shadow: 2px 1px 1px #aaa;
+    -moz-box-shadow:2px 1px 1px #aaa;
+    font-size: 14px;
+    text-align: center;
+    cursor: pointer;
+}
+#lg-form label {
+    display: none;
+    font-size: 20px;
+    line-height: 25px;
+}
+.lg-container h2 {
+    font-size: 32px;
+    text-align: center;
+}
+#message{
+    width: 100%;
+}
+#lg-form button:active{
+    -webkit-box-shadow: 0px 0px 1px #aaa;
+    -moz-box-shadow: 0px 0px 1px #aaa;
+}
+#lg-form button:hover{
+    background: #f4f4f4
+}

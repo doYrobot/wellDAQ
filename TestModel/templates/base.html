@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        {% block title %}单井数据采集系统{% endblock %}
+    </title>
+    <meta charset="utf-8">
+</head>
+<body>
+    {% include 'header.html' %}
+    {% block content %}
+        <div>这是默认内容，需要在其子模板中键进行覆盖</div>
+    {% endblock %}
+</body>
+</html>

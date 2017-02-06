@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ajax练习</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="{% static 'jquery/jquery-2.2.3.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/testmodel.js' %}"></script>
+</head>
+<body>
+<div>
+    <form action="/ajax/" method="get">
+        <input type="text" name="a" id="a"><br>
+        <input type="text" name="b" id="b"><br>
+        <p>result:<span id="result"></span></p>
+        <input type="submit" name="add" id="add">
+    </form>
+</div>
+<div id="ajaxjz" style="width: 100px;height: 100px;background-color: red;">ajax动态加载</div>
+<p id="ajaxresult"></p>
+</body>
+</html>
