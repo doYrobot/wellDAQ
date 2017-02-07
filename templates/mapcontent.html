@@ -1,0 +1,213 @@
+{% load staticfiles %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <!-- 主面板 -->
+  <section class="content">
+    <!-- Info boxes -->
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">井号</span>
+            <span class="info-box-number">6-1<small>井</small></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">累计产量</span>
+            <span class="info-box-number">450.00<small>万方</small></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+
+      <!-- fix for small devices only -->
+      <div class="clearfix visible-sm-block"></div>
+
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">日产气量</span>
+            <span class="info-box-number">10000<small>方</small></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">日产液量</span>
+            <span class="info-box-number">10.00<small>方</small></span>
+          </div>
+          <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box">
+          <div class="box-header with-border">
+            <h3 class="box-title">单井控制面板</h3>
+
+            <div class="box-tools pull-right">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+              <div class="btn-group">
+                <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                  <i class="fa fa-wrench"></i></button>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">套压</a></li>
+                  <li><a href="#">瞬流</a></li>
+                  <li><a href="#">阀门开度</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">选择单井</a></li>
+                </ul>
+              </div>
+              <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <div class="row">
+              <div class="col-md-8">
+                <p class="text-center">
+                  <strong>Sales: 2017.1.31 - 2017.2.1</strong>
+                </p>
+                <!-- 图标显示区 -->
+                <div class="chart">
+                  <!-- Sales Chart Canvas -->
+                  <canvas id="salesChart" style="height: 180px;"></canvas>
+                </div>
+                <!-- /.chart-responsive -->
+              </div>
+              <!-- /.col -->
+              <div class="col-md-4">
+                <p class="text-center">
+                  <strong>控制参数进度</strong>
+                </p>
+
+                <div class="progress-group">
+                  <span class="progress-text">目标套压与当前套压</span>
+                  <span class="progress-number"><b>160</b>/200</span>
+
+                  <div class="progress sm">
+                    <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
+                  </div>
+                </div>
+                <!-- /.progress-group -->
+                <div class="progress-group">
+                  <span class="progress-text">目标瞬流与当前瞬流</span>
+                  <span class="progress-number"><b>310</b>/400</span>
+
+                  <div class="progress sm">
+                    <div class="progress-bar progress-bar-red" style="width: 80%"></div>
+                  </div>
+                </div>
+                <!-- /.progress-group -->
+                <div class="progress-group">
+                  <span class="progress-text">阀门控制开度</span>
+                  <span class="progress-number"><b>480</b>/800</span>
+
+                  <div class="progress sm">
+                    <div class="progress-bar progress-bar-green" style="width: 80%"></div>
+                  </div>
+                </div>
+                <!-- /.progress-group -->
+                <div class="progress-group">
+                  <span class="progress-text">井底压力</span>
+                  <span class="progress-number"><b>250</b>/500</span>
+
+                  <div class="progress sm">
+                    <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
+                  </div>
+                </div>
+                <!-- /.progress-group -->
+              </div>
+              <!-- /.col -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- ./box-body -->
+          <div class="box-footer">
+            <div class="row">
+              <div class="col-sm-3 col-xs-6">
+                <div class="description-block border-right">
+                  <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
+                  <h5 class="description-header">$35,210.43</h5>
+                  <span class="description-text">目标套压</span>
+                </div>
+                <!-- /.description-block -->
+              </div>
+              <!-- /.col -->
+              <div class="col-sm-3 col-xs-6">
+                <div class="description-block border-right">
+                  <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
+                  <h5 class="description-header">$10,390.90</h5>
+                  <span class="description-text">目标瞬流</span>
+                </div>
+                <!-- /.description-block -->
+              </div>
+              <!-- /.col -->
+              <div class="col-sm-3 col-xs-6">
+                <div class="description-block border-right">
+                  <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
+                  <h5 class="description-header">$24,813.53</h5>
+                  <span class="description-text">采样周期</span>
+                </div>
+                <!-- /.description-block -->
+              </div>
+              <!-- /.col -->
+              <div class="col-sm-3 col-xs-6">
+                <div class="description-block">
+                  <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
+                  <h5 class="description-header">1200</h5>
+                  <span class="description-text">调节幅度</span>
+                </div>
+                <!-- /.description-block -->
+              </div>
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.box-footer -->
+        </div>
+        <!-- /.box -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </section>
+  <!-- /.content -->
+</div>

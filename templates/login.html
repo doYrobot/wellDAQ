@@ -1,0 +1,43 @@
+{% extends "login_base.html" %}
+{% block login-title%}
+用户登录
+{% endblock%}
+{% block login-form %}
+    <form action="./" method="post" class="form-horizontal" role="form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="login_username" class="col-sm-3 control-label">用户名</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="login_username" placeholder="邮箱/员工编号" name="username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="login_password" class="col-sm-3 control-label">密码</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" id="login_password" placeholder="密码" name="password">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-5">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">下次自动登录
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-3 col-sm-offset-2">
+                <button type="submit" class="btn btn-primary">登录</button>
+            </div>
+        </div>
+    </form>
+    <div style="margin-top: 20px;padding-bottom: 20px;">
+        <div class="form-group">
+            <div class="col-sm-7 col-sm-offset-2">
+                <p>如果没有帐号,请点击</p>
+            </div>
+            <div class="col-sm-3">
+                <a href="./signup">注册</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

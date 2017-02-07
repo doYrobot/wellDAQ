@@ -1,0 +1,14 @@
+{% extends "comm_base.html" %}
+{% load staticfiles %}
+{% block title %}单井数据采集系统{% endblock %}
+{% block content %}
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="wrapper">
+    {% include 'header.html' %}
+    {% include 'siderbar.html' %}
+    {% include 'mapcontent.html' %}
+    {% include 'footer.html' %}
+    </div>
+
+</body>
+{% endblock %}
