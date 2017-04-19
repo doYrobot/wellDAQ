@@ -51,7 +51,7 @@ def signup(request):
             username = signupForm.cleaned_data['username']
             password = signupForm.cleaned_data['password']
             re_password = signupForm.cleaned_data['re_password']
-            true_name = signupForm.cleaned_data['true_name']
+            true_name = signupForm.cleaned_data['true_name']  # 以后添加
             department = signupForm.cleaned_data['department']
             position = signupForm.cleaned_data['position']
             if password != re_password:
