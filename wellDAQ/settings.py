@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',  # 静态文件加载时，使用
     'TestModel',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,9 @@ STATIC_URL = '/static/'
 
 # 部署时用 python manage.py collectstatic 就可以把静态文件收集到（复制到） STATIC_ROOT 目录
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
+# 未登录重定向网址
+LOGIN_REDIRECT_URL = '/accounts/'
 
 # 公共静态文件目录
 STATICFILES_DIRS = (

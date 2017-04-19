@@ -3,41 +3,42 @@
 用户注册
 {% endblock%}
 {% block login-form %}
-   <form action="#" method="post" class="form-horizontal" role="form">
+   <form action="./signup" method="post" class="form-horizontal" role="form">
+        {% csrf_token %}
         <div class="form-group">
-            <label for="signup_username" class="col-sm-3 control-label">用户名</label>
+            <label for="username" class="col-sm-3 control-label">用户名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="signup_username" placeholder="邮箱/员工编号">
+                <input type="text" class="form-control" id="signup_username" placeholder="邮箱/员工编号" name="username">
             </div>
         </div>
         <div class="form-group">
-            <label for="signup_password" class="col-sm-3 control-label">密码</label>
+            <label for="password" class="col-sm-3 control-label">密码</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="signup_password" placeholder="密码">
+                <input type="text" class="form-control" id="signup_password" placeholder="密码" name="password">
             </div>
         </div>
         <div class="form-group">
-            <label for="signup_repassword" class="col-sm-3 control-label">重复密码</label>
+            <label for="re_password" class="col-sm-3 control-label">重复密码</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="signup_repassword" placeholder="重复密码">
+                <input type="text" class="form-control" id="signup_repassword" placeholder="重复密码" name="re_password">
             </div>
         </div>
         <div class="form-group">
-            <label for="signup_name" class="col-sm-3 control-label">姓名</label>
+            <label for="true_name" class="col-sm-3 control-label">姓名</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="signup_name" placeholder="密码">
+                <input type="text" class="form-control" id="signup_name" placeholder="密码" name="true_name">
             </div>
         </div>
         <div class="form-group">
-            <label for="signup_apartment" class="col-sm-3 control-label">部门</label>
+            <label for="department" class="col-sm-3 control-label">部门</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="signup_apartment" placeholder="密码">
+                <input type="text" class="form-control" id="signup_apartment" placeholder="密码" name="department">
             </div>
         </div>
         <div class="form-group">
-            <label for="signup_work" class="col-sm-3 control-label">职位</label>
+            <label for="position" class="col-sm-3 control-label">职位</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" id="signup_work" placeholder="密码">
+                <input type="text" class="form-control" id="signup_work" placeholder="密码" name="position">
             </div>
         </div>
         <div class="form-group">
@@ -45,5 +46,10 @@
                 <button type="submit" class="btn btn-primary btn-block">注册</button>
             </div>
         </div>
+        {% for field in form %}
+            {{field.label_tag}}:{{field}}
+            {{field.errors}}
+        {% endfor %}
     </form>
+    {{errors}}
 {% endblock %}
