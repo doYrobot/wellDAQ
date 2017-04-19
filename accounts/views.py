@@ -52,7 +52,7 @@ def signup(request):
             password = signupForm.cleaned_data['password']
             re_password = signupForm.cleaned_data['re_password']
             true_name = signupForm.cleaned_data['true_name']  # 以后添加
-            department = signupForm.cleaned_data['department']
+            department = signupForm.cleaned_data['department']  # 以后添加
             position = signupForm.cleaned_data['position']
             if password != re_password:
                 errors = '两次输入的密码不一致'
@@ -71,6 +71,7 @@ def signup(request):
                 # return HttpResponse('注册成功') 测试代码
         else:
             return render(request, 'signup.html', {'form': signupForm})
+    # 如果不是提交数据，返回空白的注册表单
     else:
         signupForm = SignupForm()
 
