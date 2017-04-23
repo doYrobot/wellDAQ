@@ -1,0 +1,23 @@
+{% extends "comm_base.html" %}
+{% block content %}
+    <div style="width: 440px;
+    margin: 200px auto;
+    padding: 20px 40px;
+    border: 1px solid #f4f4f4;
+    background: rgba(255,255,255,0.7);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    --webkit-box-shadow: 0 0 2px #aaa;
+    --moz-box-shadow: 0 0 2px #aaa;">
+        <div style="margin-bottom: 30px;">
+            <h2 style="text-align: center;">
+            {% block login-title%}
+            用户登录
+            {% endblock%}
+            </h2>
+        </div>
+        {% block login-form %}
+        loginform
+        {% endblock %}
+    </div>
+{% endblock %}

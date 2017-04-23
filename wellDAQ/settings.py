@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',  # 静态文件加载时，使用
     'TestModel',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'wellDAQ.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "./templates")],  # 添加一个公共模板目录
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,9 +85,9 @@ WSGI_APPLICATION = 'wellDAQ.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'welldatabase',# 数据库名，数据库需要在mysql中建立
-        'USER': 'root',# 必须设置为原来数据库的登录帐号
-        'PASSWORD': 'Lingyue86',# 登录密码
+        'NAME': 'welldatabase',  # 数据库名，数据库需要在mysql中建立
+        'USER': 'root',  # 必须设置为原来数据库的登录帐号
+        'PASSWORD': 'Lingyue86',  # 登录密码
         'HOST': 'localhost',
         'POST': '3306',
     }
@@ -134,6 +135,9 @@ STATIC_URL = '/static/'
 
 # 部署时用 python manage.py collectstatic 就可以把静态文件收集到（复制到） STATIC_ROOT 目录
 STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
+
+# 未登录重定向网址
+LOGIN_REDIRECT_URL = '/accounts/'
 
 # 公共静态文件目录
 STATICFILES_DIRS = (

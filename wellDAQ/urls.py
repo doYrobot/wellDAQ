@@ -1,3 +1,5 @@
+# encoding:utf-8
+
 """wellDAQ URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -13,22 +15,27 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
-from TestModel import views as TestModel_views
+# from TestModel import views as TestModel_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^index/$', TestModel_views.index),
-    url(r'^home/$', TestModel_views.home),
-    url(r'^home2/$', TestModel_views.home2),
-    url(r'^add/$', TestModel_views.add, name='add'),
 
-    url(r'^index2/$', TestModel_views.index2, name='form'),
+    # 测试用的url
+    # url(r'^index/$', TestModel_views.index),
+    # url(r'^home/$', TestModel_views.home),
+    # url(r'^home2/$', TestModel_views.home2),
+    # url(r'^add/$', TestModel_views.add, name='add'),
 
-    url(r'^add/(\d+)/(\d+)/$', TestModel_views.add2, name='add2'),
-    url(r'^login/$', TestModel_views.login, name='login'),
-    url(r'^ajax/$', TestModel_views.ajax, name='ajax'),
-    url(r'^ajax_dict/$', TestModel_views.ajax_dict, name='ajax-dict'),
-    url(r'^ajax_add/$', TestModel_views.ajax_add, name='ajax_add'),
+    # url(r'^index2/$', TestModel_views.index2, name='form'),
+
+    # url(r'^add/(\d+)/(\d+)/$', TestModel_views.add2, name='add2'),
+    # url(r'^login/$', TestModel_views.login, name='login'),
+    # url(r'^ajax/$', TestModel_views.ajax, name='ajax'),
+    # url(r'^ajax_dict/$', TestModel_views.ajax_dict, name='ajax-dict'),
+    # url(r'^ajax_add/$', TestModel_views.ajax_add, name='ajax_add'),
+
+    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+
 ]
