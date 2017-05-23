@@ -1,0 +1,9 @@
+{% extends "index_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block title %}单井数据采集系统-查询井位数据{% endblock %}
+<!-- 覆写父模板中的内容，将显示新的数据 -->
+{% block content-board %}
+    {% include 'mainboard_query_well.html' %}
+{% endblock %}

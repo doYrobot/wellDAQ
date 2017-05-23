@@ -1,12 +1,21 @@
 {% extends "comm_base.html" %}
 {% load staticfiles %}
 {% block title %}单井数据采集系统{% endblock %}
+{% block headlink %}
+<script src="{% static 'js/pages/dashboard2.js' %}"></script>
+{% endblock %}
+{% block pagejavascript %}
+<script>  
+</script>
+{% endblock %}
 {% block content %}
 <body class="hold-transition skin-blue sidebar-mini">
     <div class="wrapper">
     {% include 'header.html' %}
     {% include 'siderbar.html' %}
+    {% block content-board %}
     {% include 'mapcontent.html' %}
+    {% endblock %}
     {% include 'footer.html' %}
     </div>
 

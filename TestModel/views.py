@@ -14,7 +14,7 @@ def index(request):
 
 # 返回html模板
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'comm_base.html')
 
 
 # 返回html模板中带参数

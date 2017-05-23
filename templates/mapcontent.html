@@ -11,10 +11,10 @@
       <li class="active">Dashboard</li>
     </ol>
   </section>
-
   <!-- Main content -->
   <!-- 主面板 -->
   <section class="content">
+  {% block content-mainboard %}
     <!-- Info boxes -->
     <div class="row">
       <div class="col-md-3 col-sm-6 col-xs-12">
@@ -208,6 +208,7 @@
       <!-- /.col -->
     </div>
     <!-- /.row -->
+  {% endblock %}
   </section>
   <!-- /.content -->
 </div>

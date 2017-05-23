@@ -32,7 +32,7 @@ DEBUG = True
 
 
 # 设置可以访问的域名
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.100.4', 'www.welldaq.com','127.0.0.1']
 
 
 # Application definition
@@ -46,7 +46,15 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',  # 静态文件加载时，使用
     'TestModel',
     'accounts',
+    'alonewell',
+    'allwell',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    'PAGINATE_BY': 10
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -116,9 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -139,8 +147,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'collected_static')
 # 未登录重定向网址
 LOGIN_REDIRECT_URL = '/accounts/'
 
-# 公共静态文件目录
+# 公共静态文件目录,部署时，会将此文件夹内的文件复制到STATIC_ROOT
 STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'common_static'),
-        '/var/www/static/',
+    os.path.join(BASE_DIR, 'common_static'),
 )

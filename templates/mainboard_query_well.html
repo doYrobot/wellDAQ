@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <!-- 主面板 -->
+  <section class="content">
+  {% block content-mainboard %}
+    <!-- Info boxes -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          井位数据
+        </h2>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>井位编号</th>
+              <th>井位名称</th>
+              <th>维度</th>
+              <th>经度</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>{{item.wellNo}}</td>
+              <td>{{item.wellName}}</td>
+              <td>{{item.dimension}}</td>
+              <td>{{item.longitude}}</td>
+            </tr>            
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /.row -->
+  {% endblock %}
+  </section>
+  <!-- /.content -->
+</div>

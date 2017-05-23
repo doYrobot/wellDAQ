@@ -1,4 +1,5 @@
 {% load staticfiles %}
+<!-- 加载静态文件 -->
 <aside class="main-sidebar">
   <!-- sidebar: style can be found in sidebar.less -->
   <section class="sidebar">
@@ -9,7 +10,7 @@
       </div>
       <div class="pull-left info">
         <p>{{username}}</p>
-        <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
       </div>
     </div>
     <!-- search form -->
@@ -34,8 +35,8 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="index.html"><i class="fa fa-circle-o"></i> 单井参数</a></li>
-          <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i> 单井面板</a></li>
+          <li><a href="/index"><i class="fa fa-circle-o"></i> 单井参数</a></li>
+          <li class="active"><a href="/index"><i class="fa fa-circle-o"></i> 单井面板</a></li>
         </ul>
       </li>
       <li class="treeview">
@@ -60,8 +61,11 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> 添加新井</a></li>
-          <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> 首页显示单井</a></li>
+          <li><a href="/alonewell/addwell"><i class="fa fa-circle-o"></i> 添加新井</a></li>
+          <li><a href="/alonewell/add_operate_parameters"><i class="fa fa-circle-o"></i> 采集数据手动添加</a></li>
+          <li><a href="/alonewell/query_well"><i class="fa fa-circle-o"></i> 井位信息汇总</a></li>
+          <li><a href="/alonewell/addwell"><i class="fa fa-circle-o"></i> 采集数据汇总</a></li>
+          <li><a href="/alonewell/test"><i class="fa fa-circle-o"></i> 暂时测试使用</a></li>
         </ul>
       </li>
     </ul>

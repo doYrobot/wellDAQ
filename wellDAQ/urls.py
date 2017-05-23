@@ -17,7 +17,13 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from rest_framework import routers
+from wellDAQ import views
 # from TestModel import views as TestModel_views
+#
+router = routers.DefaultRouter()
+router.register(r'data', views.WellBasicDataViewSet)
+router.register(r'parameter', views.OperateParametersViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -36,6 +42,9 @@ urlpatterns = [
     # url(r'^ajax_dict/$', TestModel_views.ajax_dict, name='ajax-dict'),
     # url(r'^ajax_add/$', TestModel_views.ajax_add, name='ajax_add'),
 
-    url(r'^accounts/', include('accounts.urls', namespace='accounts')),
+    url(r'^', include('accounts.urls', namespace='accounts')),
+    url(r'^', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^alonewell/', include('alonewell.urls', namespace='alonewell')),
 
 ]

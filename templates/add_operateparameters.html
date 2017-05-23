@@ -1,0 +1,29 @@
+{% extends "index_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block title %}单井数据采集系统-手动添加采集数据{% endblock %}
+{% block headlink %}
+{% endblock %}
+{% block pagejavascript %}
+<script>
+    $(function(){
+        $('#btn_query_wellno').click(function(){
+            //alert($('#wellNo').val());
+            var wellNo=$('#wellNo').val();
+            //$.post(URL,data,callback); post函数语法
+            $.get('/alonewell/isvalid_wellNo',
+                {'wellNo':wellNo},
+            function(json){
+                alert(json.result);
+                alert(json.wellNo);   
+            },'json'
+            );
+        });
+    }); 
+</script>
+{% endblock %}
+<!-- 覆写父模板中的内容，将显示新的数据 -->
+{% block content-board %}
+    {% include 'mainboard_add_operateparameters.html' %}
+{% endblock %}

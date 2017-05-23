@@ -1,0 +1,133 @@
+{% load staticfiles %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <!-- 主面板 -->
+  <section class="content">
+  {% block content-mainboard %}
+    <!-- Info boxes -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          添加新井数据
+        </h2>
+      </div>
+      <div class="panel-body">
+        <form action="./add_operate_parameters" class="form-horizontal" role="form" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="wellNo" class="col-sm-2 control-label">井位编号</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="wellNo" id="wellNo" placeholder="如：060100">
+            </div>
+            <div class="col-sm-2">
+              <button type="button" class="btn btn-primary" id="btn_query_wellno">查询</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="data_storage" class="col-sm-2 control-label">存储时间</label>
+            <div class="col-sm-4">
+              <input type="datetime" class="form-control" name="data_storage" placeholder="如：时间">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="targetpress" class="col-sm-2 control-label">目标套压</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="targetpress" placeholder="如：1.0,单位均为Mpa">
+            </div>
+          </div>          
+          <div class="form-group">
+            <label for="presentpress" class="col-sm-2 control-label">当前套压</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="presentpress" placeholder="如：0.8,单位均为Mpa">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="bottompress" class="col-sm-2 control-label">井底压力</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="bottompress" placeholder="如：1.2,单位均为Mpa">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="targetflow" class="col-sm-2 control-label">目标流量</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="targetflow" placeholder="如：1000,单位为方/天">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="presentflow" class="col-sm-2 control-label">当前流量</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="presentflow" placeholder="如：800,单位为方/天">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="totalflow" class="col-sm-2 control-label">产量总计</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="totalflow" placeholder="如：300000,单位为方">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="dailyflow" class="col-sm-2 control-label">日产气量</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="dailyflow" placeholder="如：2000,单位为方">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="cycle" class="col-sm-2 control-label">采样周期</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="cycle" placeholder="如：23,单位为秒">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="stepRange" class="col-sm-2 control-label">采样步长</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="stepRange" placeholder="40,单位为脉冲">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="instantLP" class="col-sm-2 control-label">当前液量</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="instantLP" placeholder="如：1.2,单位为方">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="totalLP" class="col-sm-2 control-label">累计液量</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="totalLP" placeholder="如：113，单位为方">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="valvelift" class="col-sm-2 control-label">阀门开度</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="valvelift" placeholder="45,表示45%">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-5 col-sm-offset-1">
+              <button type="submit" class="btn btn-primary btn-block">确认保存</button>
+            </div>
+          </div>
+
+        {% for field in form %}
+          {{field.label_tag}}:{{field}}
+          {{field.errors}}
+        {% endfor %}
+        </form>
+      </div>
+    </div>
+    <!-- /.row -->
+  {% endblock %}
+  </section>
+  <!-- /.content -->
+</div>

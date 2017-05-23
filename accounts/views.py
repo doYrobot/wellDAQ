@@ -1,6 +1,6 @@
 # encoding:utf-8
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 import json
 from django.http import JsonResponse
 from accounts.forms import LoginForm, SignupForm
@@ -17,6 +17,8 @@ from django.contrib.auth.models import User
 def mylogin(request):
     username = ''
     password = ''
+    if request.user.is_authenticated():# 判断是否已经有登录的用户
+        return HttpResponseRedirect('/index')
     if request.method == "POST":  # 当提交表单时
         loginForm = LoginForm(request.POST)  # loginForm包含提交的数据 数据绑定
         if loginForm.is_valid():  # 如果提交的数据合法 数据验证
@@ -25,7 +27,8 @@ def mylogin(request):
             user = auth.authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)  # 将user存入session
-                return render(request, 'index_base.html', {'username': username})
+                request.session['username'] = username
+                return HttpResponseRedirect('/index')
             else:
                 loginForm = LoginForm()
                 return render(request, 'login.html')
@@ -80,7 +83,9 @@ def signup(request):
 
 @login_required
 def index(request):
-    return render(request, 'index_base.html')
+    username = request.session.get('username')
+    print username
+    return render(request, 'index_base.html', {'username': username})
 
 
 @login_required

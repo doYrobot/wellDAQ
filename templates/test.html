@@ -1,0 +1,183 @@
+{% extends "index_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block title %}单井数据采集系统-手动添加采集数据{% endblock %}
+{% block headlink %}
+{% endblock %}
+{% block pagejavascript %}
+<script>
+    $(function(){
+        /**
+         * [init description]
+         * @type {[type]}
+         * 测试计时器功能
+        var init=self.setInterval('clock()',1000);//设置闹钟启动
+        $('button').click(function(){//通过点击事件，取消闹钟
+            window.clearInterval(init);
+        });*/
+        $('#startGetData').click(function(){//通过点击事件，开始采集数据
+            var init=self.setInterval('clock_getData()',10000);
+        });
+    }); 
+    function clock(){
+        var d=new Date();
+        var t=d.toLocaleTimeString();
+        $('#clock').val(t);
+    }
+    function clock_getData(){
+        var wellNo=$('#wellNo').val();
+        //$.post(URL,data,callback); post函数语法
+        $.get('/alonewell/test01',
+            {'wellNo':wellNo},
+        function(ret){
+            $.each(ret,function(i,item){
+                $.each(item,function(key,value){
+                    if(key=='fields'){
+                        var wellRow=$('<tr id="wellRow"></tr>');
+                        $('#welltable').append(wellRow);
+                        $.each(value,function(fieldskey,fieldsvalue){
+                            wellRow.append('<td>'+fieldsvalue+'</td>');
+                        });
+                    }
+                });
+            });
+        },'json'
+        );
+    }
+    $(function(){
+        var ctx=$('#salesChart').get(0).getContext('2d');
+        var myNewChart=new Chart(ctx);
+        //data对象
+        var data = {
+                        labels : ["January","February","March","April","May","June","July"],
+                        datasets : [
+                            {
+                                fillColor : "rgba(220,220,220,0.5)",
+                                strokeColor : "rgba(220,220,220,1)",
+                                pointColor : "rgba(220,220,220,1)",
+                                pointStrokeColor : "#fff",
+                                data : [65,59,90,81,56,55,40]
+                            },
+                            {
+                                fillColor : "rgba(151,187,205,0.5)",
+                                strokeColor : "rgba(151,187,205,1)",
+                                pointColor : "rgba(151,187,205,1)",
+                                pointStrokeColor : "#fff",
+                                data : [28,48,40,19,96,27,100]
+                            }
+                        ]
+                    }
+        var salesChartOptions = {
+            //Boolean - If we should show the scale at all
+            showScale: true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: false,
+            //String - Colour of the grid lines
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            //Number - Width of the grid lines
+            scaleGridLineWidth: 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: true,
+            //Boolean - Whether the line is curved between points
+            bezierCurve: true,
+            //Number - Tension of the bezier curve between points
+            bezierCurveTension: 0.3,
+            //Boolean - Whether to show a dot for each point
+            pointDot: false,
+            //Number - Radius of each point dot in pixels
+            pointDotRadius: 4,
+            //Number - Pixel width of point dot stroke
+            pointDotStrokeWidth: 1,
+            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+            pointHitDetectionRadius: 20,
+            //Boolean - Whether to show a stroke for datasets
+            datasetStroke: true,
+            //Number - Pixel width of dataset stroke
+            datasetStrokeWidth: 2,
+            //Boolean - Whether to fill the dataset with a color
+            datasetFill: true,
+            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio: true,
+            //Boolean - whether to make the chart responsive to window resizing
+            responsive: true
+        };
+
+        myNewChart.Line(data,salesChartOptions);//具体执行函数
+        //alert(data.datasets[0].data);
+        //data.datasets[0].data.shift();
+        function addNewData(){
+            var data1=Math.floor(Math.random()*100);//产生一个随机数（0-100），向下舍入
+            var data2=Math.floor(Math.random()*100);
+
+            data.labels.push('十二月');
+            data.datasets[0].data.push(data1);
+            data.datasets[1].data.push(data2);
+            myNewChart.Line(data,salesChartOptions);//第二次执行函数          
+        }
+        $('#addNewData').click(function(){
+            addNewData();
+        });
+
+
+    });
+</script>
+{% endblock %}
+<!-- 覆写父模板中的内容，将显示新的数据 -->
+{% block content-board %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <!-- 主面板 -->
+  <section class="content">
+  {% block content-mainboard %}
+    <input type="text" name="clock" id="clock">
+    <button id="stop">STOP</button>
+    <input type="text" name="wellNo" id="wellNo">
+    <button id="startGetData">开始采集数据</button>
+    <button id="addNewData">添加新数据图描点</button>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          井位数据
+        </h2>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>井位名称</th>
+              <th>维度</th>
+              <th>经度</th>
+            </tr>
+          </thead>
+          <tbody id="welltable">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="chart">
+              <!-- Sales Chart Canvas -->
+              <canvas id="salesChart" style="height: 400px;"></canvas>
+            </div>
+        </div>
+    </div>
+  {% endblock %}
+  </section>
+  <!-- /.content -->
+</div>
+{% endblock %}

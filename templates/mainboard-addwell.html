@@ -1,0 +1,64 @@
+{% load staticfiles %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <!-- 主面板 -->
+  <section class="content">
+  {% block content-mainboard %}
+    <!-- Info boxes -->
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h2 class="panel-title">
+          添加新井数据
+        </h2>
+      </div>
+      <div class="panel-body">
+        <form action="./addwell" class="form-horizontal" role="form" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="wellNo" class="col-sm-2 control-label">井位编号</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="wellNo" placeholder="如：060100">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="wellName" class="col-sm-2 control-label">单井名称</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="wellName" placeholder="苏6-1井">
+            </div>
+          </div>          
+          <div class="form-group">
+            <label for="dimension" class="col-sm-2 control-label">维度坐标</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="dimension" placeholder="如：26.112">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="longitude" class="col-sm-2 control-label">经度坐标</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" name="longitude" placeholder="如：113.406">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-5 col-sm-offset-1">
+              <button type="submit" class="btn btn-primary btn-block">确认保存</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- /.row -->
+  {% endblock %}
+  </section>
+  <!-- /.content -->
+</div>
