@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      Dashboard
+      <small>Version 0.1</small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="{% url 'accounts:index' %}"><i class="fa fa-dashboard"></i> 主页 </a></li>
+      <li class="active">Dashboard</li>
+    </ol>
+  </section>
+  <!-- Main content -->
+  <!-- 主面板 -->
+  <section class="content">
+  {% block content-mainboard %}
+  <p>面板内的具体内容</p>
+  {% endblock %}
+  </section>
+  <!-- /.content -->
+</div>

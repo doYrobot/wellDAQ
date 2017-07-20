@@ -4,6 +4,48 @@
 <!-- 加载静态文件 -->
 {% block title %}单井数据采集系统-查询井位数据{% endblock %}
 <!-- 覆写父模板中的内容，将显示新的数据 -->
+{% block headlink %}
+<script type="text/javascript">
+$(function(){
+    $('a>button[value]').click(function(){
+        alert('是否确认删除，井位编号为：'+this.value+'的数据');
+    });
+});
+</script>
+{% endblock %}
+{% block pagejavascript %}
+<script type="text/javascript">
+    $(function(){
+
+        $('td>button[value]').click(function(){
+            // alert('是否确认编辑，井位编号为：'+this.value+'的数据');
+            var wellNo=this.value;
+            var wellName="";
+            var dimension=0.0;
+            var longitude=0.0;
+
+            $.get('/alonewell/isvalid_wellNo',
+                {'wellNo':wellNo},
+            function(json){
+                // alert(json.result.wellName);
+                wellName=json.result.wellName;
+                dimension=json.result.dimension;
+                longitude=json.result.longitude;
+                $('#addWellbasicDataModal form input[name="wellNo"]').val(wellNo);
+                $('#addWellbasicDataModal form input[name="wellName"]').val(wellName);
+                $('#addWellbasicDataModal form input[name="dimension"]').val(dimension);
+                $('#addWellbasicDataModal form input[name="longitude"]').val(longitude);
+                $('#addWellbasicDataModal').modal('show');
+                // alert(json.wellNo);   
+            },'json'
+            );
+        });
+        $('#addWellBasicData').click(function(){
+            $('#WellBasicDataForm').submit();
+        });
+    });
+</script>
+{% endblock %}
 {% block content-board %}
     {% include 'mainboard_query_well.html' %}
 {% endblock %}

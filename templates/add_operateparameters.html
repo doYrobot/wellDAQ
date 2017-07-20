@@ -7,20 +7,6 @@
 {% endblock %}
 {% block pagejavascript %}
 <script>
-    $(function(){
-        $('#btn_query_wellno').click(function(){
-            //alert($('#wellNo').val());
-            var wellNo=$('#wellNo').val();
-            //$.post(URL,data,callback); post函数语法
-            $.get('/alonewell/isvalid_wellNo',
-                {'wellNo':wellNo},
-            function(json){
-                alert(json.result);
-                alert(json.wellNo);   
-            },'json'
-            );
-        });
-    }); 
 </script>
 {% endblock %}
 <!-- 覆写父模板中的内容，将显示新的数据 -->

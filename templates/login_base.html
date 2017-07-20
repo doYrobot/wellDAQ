@@ -1,4 +1,7 @@
 {% extends "comm_base.html" %}
+{% load staticfiles %}
+{% block bodyset %}
+<body background="{% static 'img/bgmap.jpg' %}">
 {% block content %}
     <div style="width: 440px;
     margin: 200px auto;
@@ -19,5 +22,8 @@
         {% block login-form %}
         loginform
         {% endblock %}
-    </div>
+    </div>     
+
+{% endblock %}
+</body>
 {% endblock %}

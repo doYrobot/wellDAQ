@@ -1,0 +1,57 @@
+{% extends "index_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block title %}单井数据采集系统-查询采集数据{% endblock %}
+<!-- 覆写父模板中的内容，将显示新的数据 -->
+{% block headlink %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+{% block pagejavascript %}
+<script type="text/javascript">
+    $(function(){
+
+        $('.form_datetime').datetimepicker({
+            language:'zh-CN',
+            format:'yyyy-mm-dd hh:ii',
+            todayBtn:true,
+            autoclose:true,
+            pickerPosition:'bottom-left'
+
+        });
+        $('td>button[value]').click(function(){
+            // alert('是否确认编辑，井位编号为：'+this.value+'的数据');
+            var wellNo=this.value;
+            var data_storage="";
+            var targetpress=0.0;
+            var presentpress=0.0;
+
+            $.get('/alonewell/isvalid_wellNo',
+                {'wellNo':wellNo},
+            function(json){
+                // alert(json.result.wellName);
+                data_storage=json.result.wellName;
+                targetpress=json.result.dimension;
+                presentpress=json.result.longitude;
+                $('#addOperateParametersModal form input[name="wellNo"]').val(wellNo);
+                $('#addOperateParametersModal form input[name="data_storage"]').val(wellName);
+                $('#addOperateParametersModal form input[name="targetpress"]').val(dimension);
+                $('#addOperateParametersModal form input[name="presentpress"]').val(longitude);
+                $('#addOperateParametersModal').modal('show');
+                // alert(json.wellNo);   
+            },'json'
+            );
+        });
+        $('a>button[value]').click(function(){
+            alert('是否确认删除，井位编号为：'+this.value+'的数据');
+        });
+        $('#addOperateParameters').click(function(){
+            $('#addOperateParametersModal').submit();
+        });
+    });
+</script>
+{% endblock %}
+{% block content-board %}
+    {% include 'mainboard_query_parameters.html' %}
+{% endblock %}

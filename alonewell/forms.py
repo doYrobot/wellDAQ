@@ -3,6 +3,7 @@
 
 from django import forms
 from models import WellBasicData
+from django.forms import ModelForm
 
 # 添加单井数据表单
 
@@ -14,9 +15,26 @@ class AddWellForm(forms.Form):
     longitude = forms.FloatField()  # 经度
 
 
+class EditWellForm(ModelForm):
+
+    class Meta:
+        model = WellBasicData
+        fields = ('wellNo', 'wellName', 'dimension', 'longitude')
+
+    def __init__(self, request, *args, **kwargs):
+        # 重写父类的方法
+        super(EditWellForm, self).__init__(*args, **kwargs)
+
+        self.fields['wellNo'].widget = forms.TextInput()
+        self.fields['wellName'].widget = forms.TextInput()
+        self.fields['dimension'].widget = forms.TextInput()
+        self.fields['longitude'].widget = forms.TextInput()
+        #self.fields['longitude'].widget = forms.TextInput(attrs={'class': 'form-control'})
+
+
 class AddOperateParametersForm(forms.Form):
     wellNo = forms.IntegerField()
-    data_storage = forms.DateField()
+    data_storage = forms.DateTimeField()
     targetpress = forms.FloatField()
     presentpress = forms.FloatField()
     bottompress = forms.FloatField()

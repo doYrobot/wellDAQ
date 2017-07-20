@@ -10,4 +10,6 @@ urlpatterns = [
     url(r'signup$', views.signup, name='signup'),
     url(r'index$', views.index, name='index'),
     url(r'loginout$', views.loginout, name='loginout'),
+    url(r'accounts/detail$', views.set_user_detail, name='set_user_detail'),
+    url(r'accounts/set_permissions',views.set_user_permissions,name='set_permissions'),
 ]

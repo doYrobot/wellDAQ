@@ -3,16 +3,21 @@
 from django.shortcuts import render
 from forms import AddWellForm, AddOperateParametersForm
 from models import WellBasicData, OperateParameters
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 import json
 
 # Create your views here.
 
-# 添加基础井位信息
+# 添加或者更新基础井位信息
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 
+@login_required
 def addwell(request):
     if request.method == 'POST':
         addWellForm = AddWellForm(request.POST)
@@ -21,10 +26,17 @@ def addwell(request):
             wellName = addWellForm.cleaned_data['wellName']
             dimension = addWellForm.cleaned_data['dimension']
             longitude = addWellForm.cleaned_data['longitude']
-            wellobject = WellBasicData.objects.create(
-                wellNo=wellNo, wellName=wellName, dimension=dimension, longitude=longitude)
+            # 其返回值为元组，（对象，ture或者false）
+            if WellBasicData.objects.filter(wellNo=wellNo):
+                wellobject = WellBasicData.objects.get(wellNo=wellNo)
+            else:
+                wellobject = WellBasicData()
+            wellobject.wellNo = wellNo
+            wellobject.wellName = wellName
+            wellobject.dimension = dimension
+            wellobject.longitude = longitude
             wellobject.save()
-            return render(request, 'addwell.html')
+            return HttpResponseRedirect('alonewell/query_well')
     else:
         addWellForm = AddWellForm()
         return render(request, 'addwell.html')
@@ -32,15 +44,28 @@ def addwell(request):
 # 查询所有井位信息
 
 
+@login_required
 def query_well(request):
     # 通过查询得到满足条件的所有对象列表，最后将对象列表返回到模板
     # 在模板中采用for循环读出对象，逐个显示
+    items = WellBasicData.objects.all()
+    return render(request, 'query_well.html', {'items': items})  # 查询所有井位信息
+
+# 删除某行井位信息
+
+
+@login_required
+def query_well_del(request, wellno):
+    # 通过查询得到满足条件的所有对象列表，最后将对象列表返回到模板
+    # 在模板中采用for循环读出对象，逐个显示
+    WellBasicData.objects.filter(wellNo=wellno).delete()
     items = WellBasicData.objects.all()
     return render(request, 'query_well.html', {'items': items})
 
 # 添加单井运行参数
 
 
+@login_required
 def add_operate_parameters(request, templatename='add_operateparameters.html'):
     if request.method == 'POST':
         addOperateParametersForm = AddOperateParametersForm(request.POST)
@@ -77,22 +102,40 @@ def add_operate_parameters(request, templatename='add_operateparameters.html'):
             operateParametersObject.totalLP = totalLP
             operateParametersObject.valvelift = valvelift
             operateParametersObject.save()
-            return render(request, 'add_operateparameters.html')
+            return HttpResponseRedirect('alonewell/query_parameters')
         else:
             return render(request, 'add_operateparameters.html', {'form': addOperateParametersForm})
 
     else:
         return render(request, 'add_operateparameters.html')
+# 将采集数据全部返回
 
+
+@login_required
+def query_parameters(request):
+    items = OperateParameters.objects.all()
+    return render(request, 'query_parameters.html', {'items': items})
+
+# 删除一行参数
+
+
+@login_required
+def query_parameters_del(request, parameters_id):
+    OperateParameters.objects.filter(id=parameters_id).delete()
+    return HttpResponseRedirect('alonewell/query_parameters')
 # 通过AJAX查询井号是否已经保存
 
 
+@login_required
 def isvalid_wellNo(request):
     if request.method == 'GET':
         wellNo = request.GET['wellNo']
         print wellNo
-        if WellBasicData.objects.filter(wellNo=wellNo):
-            wellNo_result = {'result': 'ok', 'wellNo': wellNo}
+        obj_well = WellBasicData.objects.get(wellNo=wellNo)
+        obj_well_json = {'wellName': obj_well.wellName,
+                         'dimension': obj_well.dimension, 'longitude': obj_well.longitude}
+        if obj_well:
+            wellNo_result = {'result': obj_well_json, 'wellNo': wellNo}
         else:
             wellNo_result = {'result': 'wrong', 'wellNo': wellNo}
 
@@ -112,7 +155,7 @@ def test01(request):
     if request.method == 'GET':
         if request.GET['wellNo']:
             wellNo = request.GET['wellNo']
-            if WellBasicData.objects.filter(wellNo=wellNo):
+            if WellBasicData.objects.get(wellNo=wellNo):
                 # object_wellNo = WellBasicData.objects.filter(wellNo=wellNo)
                 result = serializers.serialize(
                     'json', WellBasicData.objects.filter(wellNo=wellNo))

@@ -25,7 +25,7 @@
             <span class="label label-success">4</span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">You have 4 messages</li>
+            <li class="header">你有4条消息</li>
             <li>
               <!-- inner menu: contains the actual data -->
               <ul class="menu">
@@ -92,7 +92,7 @@
                 </li>
               </ul>
             </li>
-            <li class="footer"><a href="#">See All Messages</a></li>
+            <li class="footer"><a href="#">查看全部</a></li>
           </ul>
         </li>
         <!-- Notifications: style can be found in dropdown.less 铃铛图标-->
@@ -102,7 +102,7 @@
             <span class="label label-warning">10</span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">You have 10 notifications</li>
+            <li class="header">你有10条提醒</li>
             <li>
               <!-- inner menu: contains the actual data -->
               <ul class="menu">
@@ -134,7 +134,7 @@
                 </li>
               </ul>
             </li>
-            <li class="footer"><a href="#">View all</a></li>
+            <li class="footer"><a href="#">查看全部</a></li>
           </ul>
         </li>
         <!-- Tasks: style can be found in dropdown.less 旗帜图标-->
@@ -144,7 +144,7 @@
             <span class="label label-danger">9</span>
           </a>
           <ul class="dropdown-menu">
-            <li class="header">You have 9 tasks</li>
+            <li class="header">你有9个任务</li>
             <li>
               <!-- inner menu: contains the actual data -->
               <ul class="menu">
@@ -207,7 +207,7 @@
               </ul>
             </li>
             <li class="footer">
-              <a href="#">View all tasks</a>
+              <a href="#">查看全部</a>
             </li>
           </ul>
         </li>
@@ -215,15 +215,15 @@
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <img src="{% static 'img/ant.jpg' %}" class="user-image" alt="User Image">
-            <span class="hidden-xs">{{username}}</span>
+            <span class="hidden-xs">{{user.userprofile.true_name}}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
               <img src="{% static 'img/ant.jpg' %}" class="img-circle" alt="User Image">
 
-              <p>
-                小蚂蚁 - 系统开发者
+              <p style="color: #000">
+                {{user.userprofile.department}} - {{user.userprofile.position}}
                 <small>Member since Nov. 2012</small>
               </p>
             </li>
@@ -231,13 +231,13 @@
             <li class="user-body">
               <div class="row">
                 <div class="col-xs-4 text-center">
-                  <a href="#">Followers</a>
+                  <a href="#">单井</a>
                 </div>
                 <div class="col-xs-4 text-center">
-                  <a href="#">Sales</a>
+                  <a href="#">报表</a>
                 </div>
                 <div class="col-xs-4 text-center">
-                  <a href="#">Friends</a>
+                  <a href="#">工艺</a>
                 </div>
               </div>
               <!-- /.row -->
@@ -245,7 +245,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="/accounts/detail" class="btn btn-default btn-flat">详细资料</a>
               </div>
               <div class="pull-right">
                 <a href="./loginout" class="btn btn-default btn-flat">退出</a>

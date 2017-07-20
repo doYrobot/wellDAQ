@@ -9,6 +9,14 @@ from django.db import models
 
 
 class WellBasicData(models.Model):
+
+    class Meta:
+        # 权限设置
+        permissions = (
+            ('test1_wellbasicdata', 'this is test for permissions'),
+            ('test2_wellbasicdata', 'this is test for permissions'),
+            ('test3_wellbasicdata', 'this is test for permissions'),
+        )
     wellNo = models.IntegerField(primary_key=True)
     wellName = models.CharField(max_length=40)
     dimension = models.FloatField()  # 维度
@@ -21,20 +29,20 @@ class WellBasicData(models.Model):
 
 
 class OperateParameters(models.Model):
-    wellNo = models.ForeignKey(WellBasicData, related_name='No')
-    data_storage = models.DateField()
-    targetpress = models.FloatField()
-    presentpress = models.FloatField()
-    bottompress = models.FloatField()
-    targetflow = models.IntegerField()
-    presentflow = models.IntegerField()
-    totalflow = models.IntegerField()
-    dailyflow = models.IntegerField()
-    cycle = models.IntegerField()
-    stepRange = models.FloatField()
-    instantLP = models.FloatField()
-    totalLP = models.FloatField()
-    valvelift = models.IntegerField()
+    wellNo = models.ForeignKey(WellBasicData, related_name='wellmodel')
+    data_storage = models.DateTimeField(blank=True)
+    targetpress = models.FloatField(blank=True)
+    presentpress = models.FloatField(blank=True)
+    bottompress = models.FloatField(blank=True)
+    targetflow = models.IntegerField(blank=True)
+    presentflow = models.IntegerField(blank=True)
+    totalflow = models.IntegerField(blank=True)
+    dailyflow = models.IntegerField(blank=True)
+    cycle = models.IntegerField(blank=True)
+    stepRange = models.FloatField(blank=True)
+    instantLP = models.FloatField(blank=True)
+    totalLP = models.FloatField(blank=True)
+    valvelift = models.IntegerField(blank=True)
 
     def __unicode__(self):
-        return self.wellNo
+        return self.wellNo.wellName

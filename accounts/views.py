@@ -8,6 +8,8 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
+from django.urls import reverse
+from models import UserProfile
 # from django.core.urlresolvers import reverse
 
 
@@ -17,7 +19,7 @@ from django.contrib.auth.models import User
 def mylogin(request):
     username = ''
     password = ''
-    if request.user.is_authenticated():# 判断是否已经有登录的用户
+    if request.user.is_authenticated():  # 判断是否已经有登录的用户
         return HttpResponseRedirect('/index')
     if request.method == "POST":  # 当提交表单时
         loginForm = LoginForm(request.POST)  # loginForm包含提交的数据 数据绑定
@@ -54,9 +56,9 @@ def signup(request):
             username = signupForm.cleaned_data['username']
             password = signupForm.cleaned_data['password']
             re_password = signupForm.cleaned_data['re_password']
-            true_name = signupForm.cleaned_data['true_name']  # 以后添加
-            department = signupForm.cleaned_data['department']  # 以后添加
-            position = signupForm.cleaned_data['position']
+            true_name = signupForm.cleaned_data['true_name']  # 姓名
+            department = signupForm.cleaned_data['department']  # 部门
+            position = signupForm.cleaned_data['position']  # 职位
             if password != re_password:
                 errors = '两次输入的密码不一致'
                 return render(request, 'signup.html', {'errors': errors})
@@ -64,9 +66,19 @@ def signup(request):
             if len(filterResult) > 0:
                 errors = '该用户已经存在'
                 return render(request, 'signup.html', {'errors': errors})
-            user = User.objects.create_user(username)
+            user = User()
+            user.username = username
             user.set_password(password)
+
             user.save()
+
+            userProfile = UserProfile()
+            userProfile.user_id = user.id
+            userProfile.true_name = true_name
+            userProfile.department = department
+            userProfile.position = position
+            userProfile.save()
+
             newUser = auth.authenticate(username=username, password=password)
             if newUser is not None:
                 login(request, newUser)
@@ -84,11 +96,25 @@ def signup(request):
 @login_required
 def index(request):
     username = request.session.get('username')
-    print username
-    return render(request, 'index_base.html', {'username': username})
+    user = User.objects.get(username=username)
+    return render(request, 'index_base.html', {'username': username, 'user': user})
 
 
 @login_required
 def loginout(request):
     logout(request)  # 清除session中的user
-    return render(request, 'login.html')
+    return HttpResponseRedirect('/')
+
+# 补全用户详细信息，如设置头像等
+
+
+@login_required
+def set_user_detail(request, template_name='index_base.html'):
+    return render(request, template_name)  # 需要编写详细信息模板
+
+# 补全用户详细信息，如设置头像等
+
+
+@login_required
+def set_user_permissions(request, template_name='set_userpermissions.html'):
+    return render(request, template_name)

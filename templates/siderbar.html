@@ -9,7 +9,7 @@
         <img src="{% static 'img/ant.jpg' %}" class="img-circle" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>{{username}}</p>
+        <p>{{user.userprofile.true_name}}</p>
         <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
       </div>
     </div>
@@ -48,8 +48,12 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> 汇总数据</a></li>
-          <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> 汇总数据</a></li>
+          <li><a href="{% url 'alonewell:query_well'%}"><i class="fa fa-circle-o"></i> 井位信息汇总</a></li>
+          <li><a href="{% url 'alonewell:query_parameters'%}"><i class="fa fa-circle-o"></i> 运行数据汇总</a></li>
+          {% if perms.alonewell.test1_wellbasicdata %}
+          <li><a href="/alonewell/query_well"><i class="fa fa-circle-o"></i> 班报生成</a></li>          
+          <li><a href="/alonewell/query_well"><i class="fa fa-circle-o"></i> 月报生成</a></li>
+          {% endif %}
         </ul>
       </li>
       <li class="treeview">
@@ -61,11 +65,12 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li><a href="/alonewell/addwell"><i class="fa fa-circle-o"></i> 添加新井</a></li>
-          <li><a href="/alonewell/add_operate_parameters"><i class="fa fa-circle-o"></i> 采集数据手动添加</a></li>
-          <li><a href="/alonewell/query_well"><i class="fa fa-circle-o"></i> 井位信息汇总</a></li>
-          <li><a href="/alonewell/addwell"><i class="fa fa-circle-o"></i> 采集数据汇总</a></li>
-          <li><a href="/alonewell/test"><i class="fa fa-circle-o"></i> 暂时测试使用</a></li>
+          <li><a href="{% url 'accounts:set_permissions'%}"><i class="fa fa-circle-o"></i>授权管理</a></li>
+          <li><a href="/alonewell/add_operate_parameters"><i class="fa fa-circle-o"></i>显示设置</a></li>
+          <li><a href="{% url 'alonewell:query_well'%}"><i class="fa fa-circle-o"></i>井位信息汇总</a></li>
+          <li><a href="/alonewell/addwell"><i class="fa fa-circle-o"></i>采集数据汇总</a></li>
+          <li><a href="/admin"><i class="fa fa-circle-o"></i>后台管理</a></li>
+          <li><a href="/alonewell/test"><i class="fa fa-circle-o"></i>暂时测试使用</a></li>
         </ul>
       </li>
     </ul>
