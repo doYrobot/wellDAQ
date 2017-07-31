@@ -9,11 +9,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
 from django.urls import reverse
-from models import UserProfile
+from models import UserProfile, Department, Position
 # from django.core.urlresolvers import reverse
 
 
-# Create your views here.
 # 登录主界面
 
 def mylogin(request):
@@ -109,12 +108,34 @@ def loginout(request):
 
 
 @login_required
-def set_user_detail(request, template_name='index_base.html'):
+def set_user_detail(request, template_name='set_user_detail.html'):
     return render(request, template_name)  # 需要编写详细信息模板
 
-# 补全用户详细信息，如设置头像等
+# 设置用户权限
 
 
 @login_required
 def set_user_permissions(request, template_name='set_userpermissions.html'):
+
+    return render(request, template_name)
+# 创建部门数据
+
+
+@login_required
+def create_department(request, template_name='query_department.html'):
+
+    # department=Department.objects.get_or_create()
+    return render(request, template_name)
+# 创建职位数据
+
+
+@login_required
+def create_position(request, template_name='query_position.html'):
+    return render(request, template_name)
+
+# 创建权限数据
+
+
+@login_required
+def create_permissions(request, template_name='set_userpermissions.html'):
     return render(request, template_name)

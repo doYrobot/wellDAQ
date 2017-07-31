@@ -1,0 +1,43 @@
+{% extends "index_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block title %}单井数据采集系统-个人资料{% endblock %}
+<!-- 覆写父模板中的内容，将显示新的数据 -->
+{% block headlink %}
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/cropperjs/cropper.css' %}">
+<script type="text/javascript" src="{% static 'plugins/cropperjs/cropper.js' %}"></script>
+{% endblock %}
+{% block pagejavascript %}
+<script type="text/javascript">
+    $(function(){
+        $('input[type=file]').change(function(){
+            var file=this.files[0];
+
+            var reader=new FileReader();
+            reader.onload=function(){
+                var url=reader.result;
+                setImageURL(url);
+            };
+            reader.readAsDataURL(file);
+        });
+        var image=$('#img_cropper');
+        function setImageURL(url){
+            image.src=url;
+        }
+        
+        // var img_user=document.getElementById('img_cropper');
+        // var copper=new Cropper(img_user,{
+        //     autoCropArea:0.5,
+        //     crop:function(data){
+
+        //     }
+
+        // });
+    });
+</script>
+</script>
+{% endblock %}
+{% block content-board %}
+    {% include 'mainboard_set_user_detail.html' %}
+{% endblock %}

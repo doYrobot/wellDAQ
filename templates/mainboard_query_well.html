@@ -74,37 +74,181 @@
               <h4 class="modal-title" id="myModalLabel">添加新井</h4>
             </div>
             <div class="modal-body">
-              <form action="./addwell" role="form" method="post" id="WellBasicDataForm">
-                {% csrf_token %}
-                <div class="form-group">
-                  <label for="wellNo" class="control-label">井位编号</label>
-                  <div>
-                    <input type="text" class="form-control" name="wellNo" placeholder="如：060100">
-                  </div>
+              <ul class="nav nav-tabs">
+                <li class="active col-sm-3">
+                  <a href="#addwell_basic" data-toggle="tab">基础数据</a>
+                </li>
+                <li class="col-sm-3">
+                  <a href="#2804" data-toggle="tab">井身数据</a>       
+                </li>
+                <li class="col-sm-3">
+                  <a href="#470" data-toggle="tab">排采单位</a>       
+                </li>
+                <li class="col-sm-3">
+                  <a href="#630" data-toggle="tab">其他数据</a>       
+                </li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane active" id="addwell_basic">
+                  <br>
+                  <form action="./addwell" role="form" method="post" id="WellBasicDataForm" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="wellNo" class="control-label col-sm-2">井位编号</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="wellNo" placeholder="如：060100">
+                      </div>
+                    </div>
+                    <!--
+                    <div class="alert alert-info">
+                      该井号已经存在，如果需要更新的话，请忽略
+                    </div>
+                    -->
+                    <div class="form-group">
+                      <label for="wellName" class="control-label col-sm-2">单井名称</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="wellName" placeholder="苏6-1井">
+                      </div>
+                    </div>          
+                    <div class="form-group">
+                      <label for="dimension" class="control-label col-sm-2">维度坐标</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="dimension" placeholder="如：26.112">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="longitude" class="control-label col-sm-2">经度坐标</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="longitude" placeholder="如：113.406">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="longitude" class="control-label col-sm-2">投产日期</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="longitude" placeholder="如：113.406">
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <div class="alert alert-info">
-                  该井号已经存在，如果需要更新的话，请忽略
+                <div class="tab-pane" id="2804">
+                <br>
+                  <form action="./addwell" role="form" method="post" id="WellBasicDataForm" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="wellNo" class="control-label col-sm-2">压裂工艺</label>
+                      <div class="col-sm-3">
+                          <select class="form-control">
+                              <option>氮气伴注</option>
+                              <option>氮气伴注</option>
+                              <option>氮气伴注</option>
+                              <option>氮气伴注</option>
+                          </select>
+                      </div>
+                      <div class="col-sm-3">
+                          <select class="form-control">
+                              <option>石英砂</option>
+                              <option>石英砂</option>
+                              <option>石英砂</option>
+                              <option>石英砂</option>
+                          </select>
+                      </div>
+                      <div class="col-sm-3">
+                          <select class="form-control">
+                              <option>木质砂</option>
+                              <option>木质砂</option>
+                              <option>木质砂</option>
+                              <option>木质砂</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="wellName" class="control-label col-sm-2">初始液面</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="wellName" placeholder="">
+                      </div>
+                    </div>          
+                    <div class="form-group">
+                      <div>
+                        <label for="dimension" class="control-label col-sm-2">煤层深度</label>
+                        <div class="col-sm-3">
+                          <input type="text" class="form-control" name="dimension" placeholder="">
+                        </div>
+                        <h5 class="col-sm-2 text-center">到</h5>
+                        <div class="col-sm-3">
+                          <input type="text" class="form-control" name="dimension" placeholder="">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="longitude" class="control-label col-sm-2">泵挂深度</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="longitude" placeholder="">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="longitude" class="control-label col-sm-2">筛管深度</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" name="longitude" placeholder="">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="longitude" class="control-label col-sm-2">检测方式及深度</label>
+                        <div class="col-sm-3">
+                            <select class="form-control">
+                                <option>音标</option>
+                                <option>压力计</option>
+                            </select>
+                        </div>
+                      <div class="col-sm-5">
+                        <input type="text" class="form-control" name="longitude" placeholder="">
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <div class="form-group">
-                  <label for="wellName" class="control-label">单井名称</label>
-                  <div >
-                    <input type="text" class="form-control" name="wellName" placeholder="苏6-1井">
-                  </div>
-                </div>          
-                <div class="form-group">
-                  <label for="dimension" class="control-label">维度坐标</label>
-                  <div>
-                    <input type="text" class="form-control" name="dimension" placeholder="如：26.112">
-                  </div>
+                <div class="tab-pane" id="470">
+                <br>
+                  <form action="./addwell" role="form" method="post" id="WellBasicDataForm" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="wellNo" class="control-label col-sm-2">公司名称</label>
+                      <div class="col-sm-8">
+                          <select class="form-control">
+                              <option>山西煤层气</option>
+                              <option>韩城煤层气</option>
+                              <option>贵州煤层气</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="wellNo" class="control-label col-sm-2">所属井区</label>
+                      <div class="col-sm-8">
+                          <select class="form-control">
+                              <option>高河井区</option>
+                              <option>高河井区</option>
+                              <option>高河井区</option>
+                              <option>高河井区</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="wellNo" class="control-label col-sm-2">排采单位</label>
+                      <div class="col-sm-8">
+                          <select class="form-control">
+                              <option>濮阳泰和</option>
+                              <option>濮阳泰和</option>
+                              <option>濮阳泰和</option>
+                              <option>濮阳泰和</option>
+                          </select>
+                      </div>
+                    </div>
+                  </form>
                 </div>
-                <div class="form-group">
-                  <label for="longitude" class="control-label">经度坐标</label>
-                  <div>
-                    <input type="text" class="form-control" name="longitude" placeholder="如：113.406">
-                  </div>
+                <div class="tab-pane" id="630">
+                <br>
+                  页面4
                 </div>
-              </form>
-            </div>
+              </div> 
+            </div>          
             <div class="modal-footer">
               <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
               <button type="button" class="btn btn-primary" id="addWellBasicData">保存</button>

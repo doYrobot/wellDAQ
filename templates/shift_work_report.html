@@ -1,0 +1,17 @@
+{% extends "index_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block title %}单井数据采集系统-单井工作制度{% endblock %}
+<!-- 覆写父模板中的内容，将显示新的数据 -->
+{% block headlink %}
+<script type="text/javascript">
+</script>
+{% endblock %}
+{% block pagejavascript %}
+
+</script>
+{% endblock %}
+{% block content-board %}
+    {% include 'mainboard_shift_work_report.html' %}
+{% endblock %}

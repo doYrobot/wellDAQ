@@ -166,3 +166,32 @@ def test01(request):
             return render(request, 'test.html')
     else:
         return render(request, 'test.html')
+
+# 将单井状态录入的数据显示
+
+
+@login_required
+def well_status(request):
+    items = OperateParameters.objects.all()
+    # 将单井状态录入的数据显示
+    return render(request, 'well_status.html', {'items': items})
+
+# 单井工作制度
+
+
+@login_required
+def well_technique(request, templatename='well_technique.html'):
+    items = OperateParameters.objects.all()
+    return render(request, templatename, {'items': items})# 单井工作制度
+
+
+@login_required
+def shift_work_report(request, templatename='shift_work_report.html'):
+    items = OperateParameters.objects.all()
+    return render(request, templatename, {'items': items})# 单井工作制度
+
+
+@login_required
+def daily_work_report(request, templatename='daily_work_report.html'):
+    items = OperateParameters.objects.all()
+    return render(request, templatename, {'items': items})

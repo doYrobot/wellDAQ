@@ -6,20 +6,18 @@
     <div class="panel panel-primary">
         <div class="panel-heading">
             <h2 class="panel-title">
-                权限管理
+                部门管理
             </h2>
         </div>
         <div class="panel-body">
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>用户名</th>
-                        <th>姓名</th>
-                        <th><a href="{% url 'accounts:create_department'%}">部门<span class="glyphicon glyphicon-edit"></span></a></th>
+                        <th>部门</th>
+                        <th>总人数</th>
                         <th><a href="{% url 'accounts:create_position'%}">职位<span class="glyphicon glyphicon-edit"></span></a></th>
-                        <th><a href="#">权限<span class="glyphicon glyphicon-edit"></span></a></th>
                         <th>
-                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addWellbasicDataModal">
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create_department">
                                 <span class="glyphicon glyphicon-plus"></span>
                             </button>
                         </th>
@@ -48,4 +46,33 @@
             </table>
         </div>
     </div>
+    {% block content-modal %}
+    <div class="modal fade" id="create_department" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        x
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">创建部门</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="#" role="form" method="post" id="WellBasicDataForm">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="wellNo" class="control-label">部门名称</label>
+                            <div>
+                                <input type="text" class="form-control" name="wellNo" placeholder="如：060100">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="addWellBasicData">保存</button>
+                </div>     
+            </div>   
+        </div>  
+    </div>    
+    {% endblock %}
 {% endblock %}

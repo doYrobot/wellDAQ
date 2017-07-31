@@ -45,6 +45,10 @@
                   <span class="glyphicon glyphicon-plus">  
                   </span>
                 </button>
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#set_daily_report">
+                  <span class="glyphicon glyphicon-file">  
+                  </span>
+                </button>
               </th>
             </tr>
           </thead>
@@ -84,128 +88,180 @@
       </div>
     </div>
     <!-- /.row -->
-  <div class="modal fade" id="addOperateParametersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-          x
-        </button>
-        <h4 class="modal-title" id="myModalLabel">添加新井</h4>
-      </div>
-      <div class="modal-body">
-        <form action="./add_operate_parameters" class="form-horizontal" role="form" method="post">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="wellNo" class="col-sm-2 control-label">井位编号</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="wellNo" id="wellNo" placeholder="如：060100">
+  <div class="modal fade" id="addOperateParametersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">  
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+            x
+          </button>
+          <h4 class="modal-title" id="myModalLabel">添加新井</h4>
+        </div>
+        <div class="modal-body">
+          <form action="./add_operate_parameters" class="form-horizontal" role="form" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="wellNo" class="col-sm-2 control-label">井位编号</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="wellNo" id="wellNo" placeholder="如：060100">
+              </div>
             </div>
-            <div class="col-sm-2">
-              <button type="button" class="btn btn-primary" id="btn_query_wellno">查询</button>
+            <div class="form-group">
+              <label for="dtp_input1" class="col-sm-2 control-label">存储时间</label>
+              <div class="input-group date form_datetime col-sm-8" data-link-field="dtp_input1">
+                <input class="form-control" type="text" readonly name="data_storage" value="">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>           
+                <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
+              </div>
+              <input type="hidden" id="dtp_input1" value="" />
             </div>
+            <div class="form-group">
+              <label for="targetpress" class="col-sm-2 control-label">目标套压</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="targetpress" placeholder="如：1.0,单位均为Mpa">
+              </div>
+            </div>          
+            <div class="form-group">
+              <label for="presentpress" class="col-sm-2 control-label">当前套压</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="presentpress" placeholder="如：0.8,单位均为Mpa">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="bottompress" class="col-sm-2 control-label">井底压力</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="bottompress" placeholder="如：1.2,单位均为Mpa">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="targetflow" class="col-sm-2 control-label">目标流量</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="targetflow" placeholder="如：1000,单位为方/天">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="presentflow" class="col-sm-2 control-label">当前流量</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="presentflow" placeholder="如：800,单位为方/天">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="totalflow" class="col-sm-2 control-label">产量总计</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="totalflow" placeholder="如：300000,单位为方">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="dailyflow" class="col-sm-2 control-label">日产气量</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="dailyflow" placeholder="如：2000,单位为方">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cycle" class="col-sm-2 control-label">采样周期</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="cycle" placeholder="如：23,单位为秒">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="stepRange" class="col-sm-2 control-label">采样步长</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="stepRange" placeholder="40,单位为脉冲">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="instantLP" class="col-sm-2 control-label">当前液量</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="instantLP" placeholder="如：1.2,单位为方">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="totalLP" class="col-sm-2 control-label">累计液量</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="totalLP" placeholder="如：113，单位为方">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="valvelift" class="col-sm-2 control-label">阀门开度</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" name="valvelift" placeholder="45,表示45%">
+              </div>
+            </div>
+          {% for field in form %}
+            {{field.label_tag}}:{{field}}
+            {{field.errors}}
+          {% endfor %}
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary" id="addOperateParameters">保存</button>
+        </div>     
+      </div>   
+    </div>
+  </div>
+    <!-- /.row -->
+  <div class="modal fade" id="set_daily_report" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+              x
+            </button>
+            <h4 class="modal-title" id="myModalLabel">设置日报生成数据</h4>
           </div>
-          <div class="form-group">
-            <label for="dtp_input1" class="col-sm-2 control-label">存储时间</label>
-            <div class="input-group date form_datetime col-sm-4" data-link-field="dtp_input1">
-              <input class="form-control" type="text" readonly name="data_storage" value="">
-              <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>           
-              <span class="input-group-addon"><span class="glyphicon glyphicon-th"></span></span>
-            </div>
-            <input type="hidden" id="dtp_input1" value="" /><br/>
+          <div class="modal-body">
+            <form action="#" class="form-horizontal" role="form" method="post">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="wellNo" class="col-sm-2 control-label">报表生成时间设置</label>
+                  <div class="col-sm-8">
+                    <select class="form-control">
+                        <option>6：00</option>
+                        <option>8：00</option>
+                        <option>18：00</option>
+                        <option>20：00</option>
+                    </select>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="dtp_input1" class="col-sm-2 control-label">选择表格样式</label>
+                  <div class="col-sm-8">
+                    <select class="form-control">
+                        <option>日报样式1</option>
+                        <option>日报样式2</option>
+                        <option>日报样式3</option>
+                        <option>日报样式4</option>
+                    </select>
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary">预览</button>
+                  </div>
+              </div>
+              <div class="form-group">
+                <label for="targetpress" class="col-sm-2 control-label">选择发送群组</label>
+                  <div class="col-sm-8">
+                    <select class="form-control">
+                        <option>单位取组1</option>
+                        <option>单位取组2</option>
+                        <option>单位取组3</option>
+                        <option>单位取组4</option>
+                    </select>
+                  </div>
+              </div> 
+            {% for field in form %}
+              {{field.label_tag}}:{{field}}
+              {{field.errors}}
+            {% endfor %}
+            </form>
           </div>
-          <div class="form-group">
-            <label for="targetpress" class="col-sm-2 control-label">目标套压</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="targetpress" placeholder="如：1.0,单位均为Mpa">
-            </div>
-          </div>          
-          <div class="form-group">
-            <label for="presentpress" class="col-sm-2 control-label">当前套压</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="presentpress" placeholder="如：0.8,单位均为Mpa">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="bottompress" class="col-sm-2 control-label">井底压力</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="bottompress" placeholder="如：1.2,单位均为Mpa">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="targetflow" class="col-sm-2 control-label">目标流量</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="targetflow" placeholder="如：1000,单位为方/天">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="presentflow" class="col-sm-2 control-label">当前流量</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="presentflow" placeholder="如：800,单位为方/天">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="totalflow" class="col-sm-2 control-label">产量总计</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="totalflow" placeholder="如：300000,单位为方">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="dailyflow" class="col-sm-2 control-label">日产气量</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="dailyflow" placeholder="如：2000,单位为方">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="cycle" class="col-sm-2 control-label">采样周期</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="cycle" placeholder="如：23,单位为秒">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="stepRange" class="col-sm-2 control-label">采样步长</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="stepRange" placeholder="40,单位为脉冲">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="instantLP" class="col-sm-2 control-label">当前液量</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="instantLP" placeholder="如：1.2,单位为方">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="totalLP" class="col-sm-2 control-label">累计液量</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="totalLP" placeholder="如：113，单位为方">
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="valvelift" class="col-sm-2 control-label">阀门开度</label>
-            <div class="col-sm-4">
-              <input type="text" class="form-control" name="valvelift" placeholder="45,表示45%">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div class="col-sm-5 col-sm-offset-1">
-              <button type="submit" class="btn btn-primary btn-block">确认保存</button>
-            </div>
-          </div>
-
-        {% for field in form %}
-          {{field.label_tag}}:{{field}}
-          {{field.errors}}
-        {% endfor %}
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-        <button type="button" class="btn btn-primary" id="addOperateParameters">保存</button>
-      </div>     
-    </div>   
-  </div>        
-</div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+            <button type="button" class="btn btn-primary" id="save_daily_report">保存设置</button>
+          </div>     
+        </div>   
+      </div>        
+  </div>
   {% endblock %}
   </section>
   <!-- /.content -->

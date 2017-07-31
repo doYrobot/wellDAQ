@@ -1,0 +1,101 @@
+{% extends "mainboard_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block content-mainboard %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                职位管理
+            </h2>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>职位</th>
+                        <th><a href="{% url 'accounts:create_department'%}">所属部门<span class="glyphicon glyphicon-edit"></span></a></th>
+                        <th>总人数</th>
+                        <th><a href="#">权限<span class="glyphicon glyphicon-edit"></span></a></th>
+                        <th>
+                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#create_postion">
+                                <span class="glyphicon glyphicon-plus"></span>
+                            </button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{item.wellNo}}</td>
+                        <td>{{item.wellName}}</td>
+                        <td>{{item.dimension}}</td>
+                        <td>{{item.longitude}}</td>
+                        <td>
+                          <button type="button" class="btn btn-primary btn-sm" value="{{item.wellNo}}">
+                                <span class="glyphicon glyphicon-edit"></span>
+                          </button>
+                          <a href="{% url 'alonewell:query_well_del' item.wellNo %}">
+                            <button type="button" class="btn btn-primary btn-sm" value="{{item.wellNo}}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                          </a>                
+                        </td>
+                    </tr>            
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% block content-modal %}
+    <div class="modal fade" id="create_postion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                        x
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">创建职位</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="#" role="form" method="post" id="WellBasicDataForm">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="wellNo" class="control-label">职位名称</label>
+                            <div>
+                                <input type="text" class="form-control" name="wellNo" placeholder="如：060100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="wellNo" class="control-label">所属部门</label>
+                            <div>
+                                <select class="form-control">
+                                    <option>部门1</option>
+                                    <option>部门2</option>
+                                    <option>部门3</option>
+                                    <option>部门4</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="wellNo" class="control-label">权限等级</label>
+                            <div>
+                                <select class="form-control">
+                                    <option>等级1</option>
+                                    <option>等级2</option>
+                                    <option>等级3</option>
+                                    <option>等级4</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="addWellBasicData">保存</button>
+                </div>     
+            </div>   
+        </div>  
+    </div>    
+    {% endblock %}
+{% endblock %}

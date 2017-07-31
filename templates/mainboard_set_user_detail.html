@@ -1,0 +1,24 @@
+{% extends "mainboard_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block content-mainboard %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+                个人资料
+            </h2>
+        </div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="img-input">fileinput</label>
+                <input type="file" id="img-input">
+            </div>
+            <div class="img-container">
+                <img style="max-width: 100%" id="img_cropper" src="" >
+            </div>
+        </div>
+    </div>
+    {% block content-modal %}
+    {% endblock %}
+{% endblock %}

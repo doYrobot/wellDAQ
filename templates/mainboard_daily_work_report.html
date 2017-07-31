@@ -1,0 +1,59 @@
+{% extends "mainboard_base.html" %}
+<!-- 继承父模板 -->
+{% load staticfiles %}
+<!-- 加载静态文件 -->
+{% block content-mainboard %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 class="panel-title">
+            单井排采日报
+            </h2>
+        </div>
+        <div class="panel-body">
+            <div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>日报编号</th>
+                            <th>日报名称</th>
+                            <th>生成日期</th>
+                            <th>上报人</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>20170601-hg40-01</td>
+                            <td>华高40井6月1日排采日报</td>
+                            <td>2017年6月1日</td>
+                            <td>李翔</td>
+                            <td>
+                                <button type="button" class="btn btn-primary">预览</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>20170601-hg41-01</td>
+                            <td>华高41井6月1日排采日报</td>
+                            <td>2017年6月1日</td>
+                            <td>李翔</td>
+                            <td>
+                                <button type="button" class="btn btn-primary">预览</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>20170601-hg42-01</td>
+                            <td>华高42井6月1日排采日报</td>
+                            <td>2017年6月1日</td>
+                            <td>李翔</td>
+                            <td>
+                                <button type="button" class="btn btn-primary">预览</button>
+                                <button type="button" class="btn btn-primary">导出</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% block content-modal %}
+    {% endblock %}
+{% endblock %}

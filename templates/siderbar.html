@@ -50,9 +50,11 @@
         <ul class="treeview-menu">
           <li><a href="{% url 'alonewell:query_well'%}"><i class="fa fa-circle-o"></i> 井位信息汇总</a></li>
           <li><a href="{% url 'alonewell:query_parameters'%}"><i class="fa fa-circle-o"></i> 运行数据汇总</a></li>
+          <li><a href="{% url 'alonewell:well_status'%}"><i class="fa fa-circle-o"></i> 单井状态录入</a></li>
+          <li><a href="{% url 'alonewell:well_technique'%}"><i class="fa fa-circle-o"></i> 单井工作制度</a></li>
           {% if perms.alonewell.test1_wellbasicdata %}
-          <li><a href="/alonewell/query_well"><i class="fa fa-circle-o"></i> 班报生成</a></li>          
-          <li><a href="/alonewell/query_well"><i class="fa fa-circle-o"></i> 月报生成</a></li>
+          <li><a href="{% url 'alonewell:shift_work_report'%}"><i class="fa fa-circle-o"></i> 班报生成</a></li>          
+          <li><a href="{% url 'alonewell:daily_work_report'%}"><i class="fa fa-circle-o"></i> 日报生成</a></li>
           {% endif %}
         </ul>
       </li>
