@@ -5,7 +5,7 @@ from django.db import models
 
 # Create your models here.
 
-# 基础的单井数据表.
+# 基础的单井数据表
 
 
 class WellBasicData(models.Model):
